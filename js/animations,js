@@ -80,7 +80,7 @@ $(document).ready(function() {
                                 '<ul>' +
                                   '<li class="reply-to"><span class="icon action-reply"></span> Reply</li>' +
                                   '<li class="retweet"><span class="icon action-retweet"></span> Retweet</li>' +
-                                  '<li class="favorite"><span class="icon action-favorite"></span> Favorite</li>' +
+                                  '<li class="favorite"><span class="icon action-favorite star"></span> Favorite</li>' +
                                   '<li class="more"><span class="icon action-more"></span> More</li>' +
                                 '</ul>' +
                               '</div>' +
@@ -127,7 +127,8 @@ $(document).ready(function() {
     $(reply).slideDown('slow', function() {});
   });
   
-  //retweets count
+  //retweets 
+  //count
   $(document).on('click', '.retweet',function() {
     var elmP = $(this).closest('.content');
     var currentElm = $(elmP).find('.num-retweets');
@@ -138,5 +139,26 @@ $(document).ready(function() {
     retweetCounter();
     jQuery(currentElm).text(retweetCounter);
   });
+  
+  //favorite 
+  //counter
+  $(document).on('click', '.favorite',function() { 
+    var currentElm = $(this).closest('.content').find('.num-favorites');
+    var currentNum = parseInt($(currentElm).text());
+    var favoriteCounter = function() {
+      return currentNum++;
+    }
+    favoriteCounter();
+    jQuery(currentElm).text(favoriteCounter);
+    //disable after one click
+    $(this).prop('disabled', true);
+    //change color of text and icon
+    var icon = $(this).closest('.content').find('.star');
+    var text = $(this).closest('.content').find('.favorite');
+    $(icon).css('background-color', '#d4d41c');
+    $(text).css('color', '#999');
+    console.log(icon);
+  });
+  
   
 });
