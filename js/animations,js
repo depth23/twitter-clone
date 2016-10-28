@@ -95,8 +95,6 @@ $(document).ready(function() {
                                 '</div>' +
                                 '<div class="users-interact">' +
                                   '<div class="favorited-users">' +
-                                    '<img src="img/funwatercat.jpg" />' +
-                                    '<img src="img/jennyshen.jpg" />' +
                                   '</div>' +
                                 '</div>' +
                                 
@@ -128,10 +126,13 @@ $(document).ready(function() {
   });
   
   //retweets 
+  //current users avatar
+  var userImg = $('#dashboard').find('.content').html();
+  var $html = $(userImg).prop('outerHTML');
+  
   //count
   $(document).on('click', '.retweet',function() {
-    var elmP = $(this).closest('.content');
-    var currentElm = $(elmP).find('.num-retweets');
+    var currentElm = $(this).closest('.content').find('.num-retweets');
     var currentNum = parseInt($(currentElm).text());
     var retweetCounter = function() {
       return currentNum++;
@@ -159,8 +160,6 @@ $(document).ready(function() {
     $(text).css('color', '#999');
     
     //add current users avatar to favorited tweet
-    var userImg = $('#dashboard').find('.content').html();
-    var $html = $(userImg).prop('outerHTML');
     $(this).closest('.content').find('.favorited-users').prepend($html);
     console.log($html);
   });
