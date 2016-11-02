@@ -70,7 +70,7 @@ $(document).ready(function() {
                         '<div class="tweet">' +
                           '<div class="content">' +
                             '<img class="avatar" src="img/alagoon.jpg" />' +
-                            '<strong class="fullname">Bastian</strong>' +
+                            '<strong class="fullname">Bastian</strong>' + ' ' +
                             '<span class="username">@bastion</span>' + ' - ' +
                             '<span class="time">' +
                               '<time class="timeago" datetime="' + dt + '">' + timeAgo + '</time>' +
