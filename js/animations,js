@@ -71,40 +71,39 @@ $(document).ready(function() {
                           '<div class="content">' +
                             '<img class="avatar" src="img/alagoon.jpg" />' +
                             '<strong class="fullname">Bastian</strong>' +
-                            '<span class="username">@bastion</span>' +
-                              '<p class="tweet-text">' + tweetVal + '</p>' +
-                              '<div class="time">' +
-                                  '<time class="timeago" datetime="' + dt + '">' + timeAgo + ' ' + formatTime() + " - " + formatDate() + '</time>' +
-                                '</div>' +
-                              '<div class="tweet-actions">' +
-                                '<ul>' +
-                                  '<li class="reply-to"><span class="icon action-reply"></span> Reply</li>' +
-                                  '<li class="retweet"><span class="icon action-retweet"></span> Retweet</li>' +
-                                  '<li class="favorite"><span class="icon action-favorite star"></span> Favorite</li>' +
-                                  '<li class="more"><span class="icon action-more"></span> More</li>' +
-                                '</ul>' +
+                            '<span class="username">@bastion</span>' + ' - ' +
+                            '<span class="time">' +
+                              '<time class="timeago" datetime="' + dt + '">' + timeAgo + '</time>' +
+                            '</span>' +
+                            '<p class="tweet-text">' + tweetVal + '</p>' +
+                            '<div class="tweet-actions">' +
+                              '<ul>' +
+                                '<li class="reply-to"><span class="icon action-reply"></span> Reply</li>' +
+                                '<li class="retweet"><span class="icon action-retweet"></span> Retweet</li>' +
+                                '<li class="favorite"><span class="icon action-favorite star"></span> Favorite</li>' +
+                                '<li class="more"><span class="icon action-more"></span> More</li>' +
+                              '</ul>' +
+                            '</div>' +
+                            '<div class="stats">' +
+                              '<div class="retweets">' +
+                                '<p class="num-retweets">0</p>' +
+                                '<p>RETWEETS</p>' +
                               '</div>' +
-                              '<div class="stats">' +
-                                '<div class="retweets">' +
-                                  '<p class="num-retweets">0</p>' +
-                                  '<p>RETWEETS</p>' +
-                                '</div>' +
-                                '<div class="favorites">' +
-                                  '<p class="num-favorites">0</p>' +
-                                  '<p>FAVORITES</p>' +
-                                '</div>' +
-                                '<div class="users-interact">' +
-                                  '<div class="favorited-users">' +
-                                  '</div>' +
-                                '</div>' +
-                                
+                              '<div class="favorites">' +
+                                '<p class="num-favorites">0</p>' +
+                                '<p>FAVORITES</p>' +
                               '</div>' +
-                              '<div class="reply">' +
-                                '<img class="avatar" src="img/alagoon.jpg" />' +
-                                '<textarea class="tweet-compose" placeholder="Reply to @mybff"/></textarea>' +
+                              '<div class="users-interact">' +
+                                '<div class="favorited-users">' +
+                                '</div>' +
                               '</div>' +
                             '</div>' +
-                          '</div><!-- .tweet -->'
+                            '<div class="reply">' +
+                              '<img class="avatar" src="img/alagoon.jpg" />' +
+                              '<textarea class="tweet-compose" placeholder="Reply to @mybff"/></textarea>' +
+                            '</div>' +
+                          '</div>' +
+                        '</div><!-- .tweet -->'
                         );
     $('.tweet-compose').val('');
   });
@@ -142,47 +141,56 @@ $(document).ready(function() {
     }
     var retweetContent = function () {
       var currentUser = $('#dashboard').find('.content p').text();
-      var newTweet = $this.closest('.tweet').html();
-      var isNewTweet = $this.closest('.tweet').find('.tweeted-by').length;
-      console.log(isNewTweet);
-      if(isNewTweet < 1) {
-        $('#stream').prepend(
-                            '<div class="tweet">' +
-                              '<p class="tweeted-by"><span class="icon action-retweet"></span>' + 
-                                currentUser + 
-                              ' Retweeted</p>' + 
-                              newTweet +
-                            '</div>'
-                            );
-      }
-      else {
-//        var removeTweetedBy = function() {
-//          $('#stream').closest('.tweet').first().find('.tweeted-by').remove();
-//        }
-        
-        $('#stream').prepend(
-                              '<div class="tweet">' +
-//                                '<p class="tweeted-by"><span class="icon action-retweet"></span>' + 
-//                                  currentUser + 
-//                                ' Retweeted</p>' + 
-                                newTweet +
-                              '</div>' 
-          
-        );
-        console.log(newTweet);
-//        removeTweetedBy();  
-      }
-      
-      
+      var reTweet = $this.closest('.tweet').find('.tweet-text').html();
+      var tweetFrom = $this.closest('.content').find('.avatar').get(0).outerHTML;
+      var tweetFromName = $this.closest('.content').find('.fullname').get(0).outerHTML;
+      var tweetFromUserName = $this.closest('.content').find('.username').get(0).outerHTML;
+      $('#stream').prepend(
+                          '<div class="tweet">' +
+                            '<p class="tweeted-by">' + '<span class="icon action-retweet"></span>' +
+                              ' ' + currentUser + ' Retweeted' + 
+                            '</p>' +
+                            '<div class="content">' +
+                              tweetFrom +
+                              tweetFromName + ' ' +
+                              tweetFromUserName + ' - ' +
+                              '<span class="time">' +
+                                '<time class="timeago" datetime="' + dt + '">' + timeAgo + '</time>' +
+                              '</span>' +
+                              '<p class="tweet-text">' + reTweet + '</p>' +
+                              '<div class="tweet-actions">' +
+                                '<ul>' +
+                                  '<li class="reply-to"><span class="icon action-reply"></span> Reply</li>' +
+                                  '<li class="retweet"><span class="icon action-retweet"></span> Retweet</li>' +
+                                  '<li class="favorite"><span class="icon action-favorite star"></span> Favorite</li>' +
+                                  '<li class="more"><span class="icon action-more"></span> More</li>' +
+                                '</ul>' +
+                              '</div>' +
+                              '<div class="stats">' +
+                                '<div class="retweets">' +
+                                  '<p class="num-retweets">0</p>' +
+                                  '<p>RETWEETS</p>' +
+                                '</div>' +
+                                '<div class="favorites">' +
+                                  '<p class="num-favorites">0</p>' +
+                                  '<p>FAVORITES</p>' +
+                                '</div>' +
+                                '<div class="users-interact">' +
+                                  '<div class="favorited-users">' +
+                                  '</div>' +
+                                '</div>' +
+                              '</div>' +
+                              '<div class="reply">' +
+                                '<img class="avatar" src="img/alagoon.jpg" />' +
+                                '<textarea class="tweet-compose" placeholder="Reply to @mybff"/></textarea>' +
+                              '</div>' +
+                            '</div>' +
+                          '</div><!-- .tweet -->'
+                          );
     }
     
     retweetContent();
     retweetCounter();
-    $('#stream').find('.content').first().find('.time').replaceWith(
-                                                              '<div class="time">' +
-                                                                '<time class="timeago" datetime="' + dt + '">' + timeAgo + /* ' ' + formatTime() + " - " + formatDate() + */ '</time>' +
-                                                              '</div>'
-                                                              );
     jQuery(currentElm).text(retweetCounter);
     
   });
