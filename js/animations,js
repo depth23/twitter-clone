@@ -117,11 +117,13 @@ $(document).ready(function() {
   });
   
   //show reply text area
+ 
+  
   $(document).on('click', '.reply-to', function() {
     var elmP = $(this).closest('.content');
     var reply = $(elmP).find('.reply');
-    console.log(elmP);
-    console.log(reply);
+//    console.log(elmP);
+//    console.log(reply);
     $(reply).slideDown('slow', function() {});
   });
   
@@ -130,15 +132,59 @@ $(document).ready(function() {
   var userImg = $('#dashboard').find('.content').html();
   var $html = $(userImg).prop('outerHTML');
   
-  //count
   $(document).on('click', '.retweet',function() {
-    var currentElm = $(this).closest('.content').find('.num-retweets');
+    //count
+    var $this = $(this);
+    var currentElm = $this.closest('.content').find('.num-retweets');
     var currentNum = parseInt($(currentElm).text());
     var retweetCounter = function() {
       return currentNum++;
     }
+    var retweetContent = function () {
+      var currentUser = $('#dashboard').find('.content p').text();
+      var newTweet = $this.closest('.tweet').html();
+      var isNewTweet = $this.closest('.tweet').find('.tweeted-by').length;
+      console.log(isNewTweet);
+      if(isNewTweet < 1) {
+        $('#stream').prepend(
+                            '<div class="tweet">' +
+                              '<p class="tweeted-by"><span class="icon action-retweet"></span>' + 
+                                currentUser + 
+                              ' Retweeted</p>' + 
+                              newTweet +
+                            '</div>'
+                            );
+      }
+      else {
+//        var removeTweetedBy = function() {
+//          $('#stream').closest('.tweet').first().find('.tweeted-by').remove();
+//        }
+        
+        $('#stream').prepend(
+                              '<div class="tweet">' +
+//                                '<p class="tweeted-by"><span class="icon action-retweet"></span>' + 
+//                                  currentUser + 
+//                                ' Retweeted</p>' + 
+                                newTweet +
+                              '</div>' 
+          
+        );
+        console.log(newTweet);
+//        removeTweetedBy();  
+      }
+      
+      
+    }
+    
+    retweetContent();
     retweetCounter();
+    $('#stream').find('.content').first().find('.time').replaceWith(
+                                                              '<div class="time">' +
+                                                                '<time class="timeago" datetime="' + dt + '">' + timeAgo + /* ' ' + formatTime() + " - " + formatDate() + */ '</time>' +
+                                                              '</div>'
+                                                              );
     jQuery(currentElm).text(retweetCounter);
+    
   });
   
   //favorite 
@@ -161,7 +207,6 @@ $(document).ready(function() {
     
     //add current users avatar to favorited tweet
     $(this).closest('.content').find('.favorited-users').prepend($html);
-    console.log($html);
   });
   
   

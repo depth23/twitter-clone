@@ -192,6 +192,15 @@ body {
 				margin-right: 2px;
 			}
 
+            .tweeted-by {
+              font-size: 14px;
+              margin: 10px 0;
+            }
+
+            .retweet-icon {
+              margin: 0 5px;
+            }
+
 	.icon {
 		color: #2FC2EF;
 		background-color: #2FC2EF;
